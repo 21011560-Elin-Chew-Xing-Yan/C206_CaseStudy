@@ -102,9 +102,10 @@ public class C206_CaseStudy {
 		// TODO Auto-generated method stub
 		C206_CaseStudy.viewAllBid(bidList);
 		String id = Helper.readString("Enter item ID > ");
+
 		Boolean delete =doDeleteBid(bidList, id);
 		if (delete == false) {
-			System.out.println("Invalid asset tag");
+			System.out.println("Invalid ID!");
 		} else {
 			System.out.println("Item " + id + " successfully deleted!");
 		}
@@ -147,11 +148,10 @@ public class C206_CaseStudy {
 
 	public static void menu() {
 		C206_CaseStudy.setHeader("Campus Online Auction Shop (COAS)");
-		System.out.println("1. Display Inventory");
+		System.out.println("1. View All Item");
 		System.out.println("2. Add Item");
-		System.out.println("3. View item");
-		System.out.println("4. Delete item");
-		System.out.println("5. Quit");
+		System.out.println("3. Delete item");
+		System.out.println("4. Quit");
 		Helper.line(80, "-");
 
 	}
@@ -164,7 +164,7 @@ public class C206_CaseStudy {
 		String buyerEmail = Helper.readString("Enter Buyer Email > ");
 		double bidPrice = Helper.readDouble("Enter bid price > $");
 
-		Bid bid = new Bid(name, id, sellerEmail, buyerEmail, bidPrice);
+		Bid bid = new Bid(id, name, sellerEmail, buyerEmail, bidPrice);
 		return bid;
 
 	}

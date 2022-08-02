@@ -38,4 +38,10 @@ public class Bid {
 		this.price = price;
 	}
 
+
+	public void showDeleted(boolean b) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
