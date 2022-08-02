@@ -1,15 +1,31 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class C206_CaseStudy {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ParseException {
 		// TODO Auto-generated method stub
 		ArrayList<User> userList = new ArrayList<User>();
+		userList.add(new User("Sally", "Pass123", "Sally@gmail.com"));
+		
 		ArrayList<Category> categoryList = new ArrayList<Category>();
+		categoryList.add(new Category("Electronic"));
+		
 		ArrayList<Item> itemList = new ArrayList<Item>();
+		
+		SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
+		Date startAuc = DateFor.parse("08/08/2022");
+		Date endAuc = DateFor.parse("18/08/2022");
+		itemList.add(new Item("iPhone", "iphone 13 (Brand New)", 354.85, startAuc, endAuc, 55.5));
+		
 		ArrayList<Bid> bidList = new ArrayList<Bid>();
+		bidList.add(new Bid("ST657892F", "James", "James@gmail.com", "Sam@yahoo.com",56.7));
+		
 		ArrayList<Deal> dealList = new ArrayList<Deal>();
+		Date endDate = DateFor.parse("26/08/2022");
+		dealList.add(new Deal("D3456", "Iphone13", "James@gmail.com", "Sam@yahoo.com", 567.89, endDate));
 
 		int option = 0;
 
@@ -29,7 +45,7 @@ public class C206_CaseStudy {
 				int viewOption = Helper.readInt("Enter option to view item type > ");
 				
 				if (viewOption == 1) {
-//				C206_CaseStudy.viewAllUser(); Jing En
+				C206_CaseStudy.viewAllUser(userList);
 					
 				}else if (viewOption == 2) {
 				C206_CaseStudy.displayAllCategory(categoryList);
@@ -58,7 +74,9 @@ public class C206_CaseStudy {
 				
 				if (addOption == 1) {
 				// Add User (Jing En)
-					
+				User usr = inputUser();
+				C206_CaseStudy.addUser(userList, usr);
+				System.out.println("User Added!");
 				}
 				else if (addOption == 2) {
 				// Add Category (Elin)
@@ -99,7 +117,7 @@ public class C206_CaseStudy {
 				int deleteOption = Helper.readInt("Enter option to delete item > ");
 				if (deleteOption == 1) {
 				// Delete User (Jing En)
-					
+				C206_CaseStudy.deleteUser(userList);
 				}
 				else if (deleteOption == 2) {
 				// Delete Category (Elin)
@@ -130,8 +148,55 @@ public class C206_CaseStudy {
 			}
 		}
 	}
+	//================================= Add User =================================
+		public static User inputUser() {
+			String user = Helper.readString("Enter user Name > ");
+			String password = Helper.readString("Enter user password > ");
+			String email = Helper.readString("Enter User Email > ");
+
+			User usr = new User(user, password, email);
+			return usr;
+			
+		}
+		public static void addUser(ArrayList<User> userList, User usr) {
+			userList.add(usr);
+		}
+		
+	//================================= Display All User =================================
+		public static String retrieveAllUsers(ArrayList<User> userList) {
+			String output = "";
+
+			for (int i = 0; i < userList.size(); i++) {
+
+				output += String.format("%-20s %-20s %-20s\n", userList.get(i).getUsername(), userList.get(i).getPassword(), userList.get(i).getEmail());
+			}
+			return output;
+		}
+		public static void viewAllUser(ArrayList<User> userList) {
+			C206_CaseStudy.setHeader("USER LIST");
+			String output = String.format("%-20s %-20s %-20s\n", "USER NAME", "USER PASSWORD", "USER EMAIL");
+			 output += retrieveAllUsers(userList);	
+			System.out.println(output);
+		}	
 	
-	
+	//================================= Delete User Based On Email =================================
+	public static void deleteUser(ArrayList<User> userList) {
+		String user_del = Helper.readString("Enter user to delete (Email) > ");
+			
+		for (int i = 0; i < userList.size(); i++) {
+				
+			if (userList.get(i).getEmail().equalsIgnoreCase(user_del)){
+				userList.remove(i);
+				System.out.println("User Successfully Deleted!");
+				break;
+					
+					
+			} else {
+				System.out.println("User does not exist");
+				break;
+			}
+		}	
+		}
 	//================================= Add Category =================================
 	public static Category inputCategory() {
 		String category = Helper.readString("Enter Category Name > ");
