@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Date;
 
 public class C206_CaseStudy {
 
@@ -12,7 +13,7 @@ public class C206_CaseStudy {
 
 		int option = 0;
 
-		while (option != 5) {
+		while (option != 4) {
 			C206_CaseStudy.menu();
 			option = Helper.readInt("Enter an option > ");
 
@@ -34,7 +35,7 @@ public class C206_CaseStudy {
 				C206_CaseStudy.displayAllCategory(categoryList);
 				
 				}else if (viewOption == 3) {
-//				C206_CaseStudy.viewAllItem(); Shaun
+				C206_CaseStudy.viewAllItem(itemList); 
 					
 				}else if (viewOption == 4) {
 				C206_CaseStudy.viewAllBid(bidList);
@@ -67,6 +68,9 @@ public class C206_CaseStudy {
 				}
 				else if (addOption == 3) {
 				// Add Item (Shaun)
+					Item i = inputItem();
+					C206_CaseStudy.addItem(itemList, i);
+					System.out.println("Item added!");
 					
 				}
 				else if (addOption == 4) {
@@ -103,7 +107,8 @@ public class C206_CaseStudy {
 					
 				}
 				else if (deleteOption == 3) {
-				// Delete Item (Shaun)
+				// Delete Item
+				C206_CaseStudy.deleteItem(itemList);
 					
 				}
 				else if (deleteOption == 4) {
@@ -117,6 +122,11 @@ public class C206_CaseStudy {
 				else {
 					System.out.println("Invalid option...");
 				}
+			} else if (option == 4) {
+				System.out.println("Thank you for using Campus Online Auction Shop (COAS)");
+			}
+			else {
+				System.out.println("Invalid option...");
 			}
 		}
 	}
@@ -170,6 +180,66 @@ public class C206_CaseStudy {
 		}	
 	}
 	
+	// ===================================== View Item =====================================
+	private static void viewAllItem(ArrayList<Item> itemList) {
+	C206_CaseStudy.setHeader("View All Item List");
+	String output = String.format("%-10s %-30s %-30s %-30s %-30s %-30s\n", "Name", "Description", "Minimum Bid Price", "Auction Start Date", "Auction End Date", "Bid Increment");
+	output += retrieveAllItem(itemList);
+	System.out.println(output);
+}
+
+private static String retrieveAllItem(ArrayList<Item> itemList) {
+	// TODO Auto-generated method stub
+	String output = "";
+
+	for (int i = 0; i < itemList.size(); i++) {
+
+		output += String.format("%-10s %-30s %-30s %-30s %-30s %-30s\n", itemList.get(i).getName(), itemList.get(i).getDescription(),
+				itemList.get(i).getMinbidprice(), itemList.get(i).getAuctionstartDate(), itemList.get(i).getAuctionEndDate(), itemList.get(i).getBidIncrement());
+	}
+	return output;
+}
+
+
+//=========================================== Add Item ===========================================
+	public static Item inputItem() {
+		String name = Helper.readString("Enter Item Name > ");
+		String description = Helper.readString("Enter Description > ");
+		double minBidPrice = Helper.readDouble("Enter Minimum Bid Price > ");
+		Date aucSD = Helper.readDate("Enter Auction Start Date > ");
+		Date aucED = Helper.readDate("Enter Auction End Date > ");
+		double bidIncr = Helper.readDouble("Enter bid increment > $");
+
+		Item item = new Item(name, description, minBidPrice, aucSD, aucED, bidIncr);
+		return item;
+
+	}
+
+	public static void addItem(ArrayList<Item> itemList, Item item) {
+
+		itemList.add(item);
+
+	}
+	
+	//================================= Delete Item Based On Name =================================
+		public static void deleteItem(ArrayList<Item> itemList) {
+			String itemName = Helper.readString("Enter Item Name to delete > ");
+			
+			for (int i = 0; i < itemList.size(); i++) {
+				
+				if (itemList.get(i).getName().equals(itemName)){
+					itemList.remove(i);
+					System.out.println("Item Deleted!");					
+					
+				} else {
+					System.out.println("Item does not exist");
+					break;
+				}
+			}	
+		}
+
+
+
 	
 	// ===================================== Delete Bid =====================================
 	private static void deleteBid(ArrayList<Bid> bidList) {
@@ -191,7 +261,7 @@ public class C206_CaseStudy {
 
 		for (int i = 0; i < bidList.size(); i++) {
 			if (id.equalsIgnoreCase(bidList.get(i).getID())) {
-				bidList.get(i).setPrice(0);;
+				bidList.remove(i);
 				
 				isDeleted = true;
 				
@@ -203,7 +273,7 @@ public class C206_CaseStudy {
 	private static void viewAllBid(ArrayList<Bid> bidList) {
 		// TODO Auto-generated method stub
 		C206_CaseStudy.setHeader("View All Bid List");
-		String output = String.format("%-10s %-30s %-10s %-30s %-30s\n", "Item ID", "Item Name", "Bid Price", "Buyer Email", "Seller Email");
+		String output = String.format("%-10s %-30s %-10s %-30s %-30s\n", "Bid ID", "Item Name", "Bid Price", "Buyer Email", "Seller Email");
 		output += retrieveAllBid(bidList);
 		System.out.println(output);
 	}
