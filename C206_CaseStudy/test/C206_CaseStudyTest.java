@@ -82,6 +82,7 @@ public class C206_CaseStudyTest {
 	    C206_CaseStudy.addCategory(categoryList, c2);
 	    assertEquals("Test that Category arraylist size is 2?", 2, categoryList.size());
 	    assertSame("Test that Category added is the same as 2nd item of the list?", c2, categoryList.get(1));
+	    
 	  }
 	
 	@Test
