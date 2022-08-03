@@ -1,18 +1,17 @@
 public class Bid {
-
-	public Bid(String iD, String name, String sellerEmail, String buyerEmail, double price) {
-		ID = iD;
-		Name = name;
-		SellerEmail = sellerEmail;
-		BuyerEmail = buyerEmail;
-		this.price = price;
-	}
-
 	private String ID;
 	private String Name;
 	private String SellerEmail;
 	private String BuyerEmail;
 	private double price;
+
+	public Bid(String iD, String name, String sellerEmail, String buyerEmail, double price) {
+		this.ID = iD;
+		this.Name = name;
+		this.SellerEmail = sellerEmail;
+		this.BuyerEmail = buyerEmail;
+		this.price = price;
+	}
 
 	public String getID() {
 		return ID;

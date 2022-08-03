@@ -1,11 +1,11 @@
 
 public class admin extends User {
+	private String role;
+
 	public admin(String username, String password, String email, String role) {
 		super(username, password, email);
-		this.role = role;
+		this.role = "Admin";
 	}
-
-	private String role;
 
 	public String getRole() {
 		return role;
