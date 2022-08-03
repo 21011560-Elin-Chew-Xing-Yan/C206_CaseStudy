@@ -100,7 +100,7 @@ public class C206_CaseStudy {
 				else if (addOption == 5) {
 				// Add Deal (Imran)
 					Deal deal  = inputDeal();
-					C206_CaseStudy.add;
+					C206_CaseStudy.addDeal(dealList,deal);
 					System.out.println("");
 					
 				}
@@ -154,7 +154,7 @@ public class C206_CaseStudy {
 	}
 
 		
-	}
+	
 		//================================= Add User =================================
 		public static User inputUser() {
 			String user = Helper.readString("Enter user Name > ");
@@ -396,7 +396,7 @@ private static String retrieveAllItem(ArrayList<Item> itemList) {
 		System.out.println(header);
 		Helper.line(80, "-");
 	}
-}
+
 
 // =========================================== View deal ===========================================
 private static void viewAllDeal(ArrayList<Deal> dealList) {
