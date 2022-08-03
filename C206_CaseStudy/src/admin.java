@@ -10,6 +10,5 @@ public class admin extends User {
 	public String getRole() {
 		return role;
 	}
-	
 
 }
