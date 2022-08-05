@@ -5,8 +5,8 @@ public class Bid {
 	private String BuyerEmail;
 	private double price;
 
-	public Bid(String iD, String name, String sellerEmail, String buyerEmail, double price) {
-		this.ID = iD;
+	public Bid(String ID, String name, String sellerEmail, String buyerEmail, double price) {
+		this.ID = ID;
 		this.Name = name;
 		this.SellerEmail = sellerEmail;
 		this.BuyerEmail = buyerEmail;

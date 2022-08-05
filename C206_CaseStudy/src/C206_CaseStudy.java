@@ -57,7 +57,6 @@ public class C206_CaseStudy {
 					C206_CaseStudy.viewAllBid(bidList);
 
 				} else if (viewOption == 5) {
-//				C206_CaseStudy.viewAllDeal(); Imran
 					C206_CaseStudy.viewAllDeal(dealList);
 				}
 			} else if (option == 2) {
@@ -72,28 +71,23 @@ public class C206_CaseStudy {
 				int addOption = Helper.readInt("Enter option to select item type > ");
 
 				if (addOption == 1) {
-					// Add User (Jing En)
 					User usr = inputUser();
 					C206_CaseStudy.addUser(userList, usr);
 					System.out.println("User Added!");
 				} else if (addOption == 2) {
-					// Add Category (Elin)
 					Category c = inputCategory();
 					C206_CaseStudy.addCategory(categoryList, c);
 					System.out.println("Category added");
 				} else if (addOption == 3) {
-					// Add Item (Shaun)
 					Item i = inputItem();
 					C206_CaseStudy.addItem(itemList, i);
 					System.out.println("Item added!");
 
 				} else if (addOption == 4) {
-					// Add Bid ()
 					Bid bid = inputBid();
 					C206_CaseStudy.addBid(bidList, bid);
 					System.out.println("Bid added!");
 				} else if (addOption == 5) {
-					// Add Deal (Imran)
 					Deal deal = inputDeal();
 					C206_CaseStudy.addDeal(dealList, deal);
 					System.out.println("");
@@ -112,21 +106,17 @@ public class C206_CaseStudy {
 
 				int deleteOption = Helper.readInt("Enter option to delete item > ");
 				if (deleteOption == 1) {
-					// Delete User (Jing En)
 					C206_CaseStudy.deleteUser(userList);
 				} else if (deleteOption == 2) {
-					// Delete Category (Elin)
 					C206_CaseStudy.deleteCategory(categoryList);
 
 				} else if (deleteOption == 3) {
-					// Delete Item
-					C206_CaseStudy.deleteItem(itemList);
+					String delItem = Helper.readString("Enter the name of the item to delete > ");
+					C206_CaseStudy.deleteItem(itemList, delItem);
 
 				} else if (deleteOption == 4) {
-					// Delete Bid ()
-					C206_CaseStudy.deleteBid(bidList);
+					C206_CaseStudy.doDeleteBid(bidList);
 				} else if (deleteOption == 5) {
-					// Delete Deal (Imran)
 					C206_CaseStudy.deleteDeal(dealList);
 
 				} else {
@@ -231,35 +221,59 @@ public class C206_CaseStudy {
 
 	// ================================= Delete Category Based On Name
 	// =================================
-	public static void deleteCategory(ArrayList<Category> categoryList) {
-		String cat_del = Helper.readString("Enter category to delete (Category) > ");
-		int check = 0;
-		for (int x = 0; x < categoryList.size(); x++) {
-			if ((categoryList.get(x).getName().equalsIgnoreCase(cat_del))) {
-				categoryList.remove(x);
-				System.out.println("Category Successfully Deleted!");
-				check = check + 1;
-				break;
+	
+	public static boolean doDeleteCategory (ArrayList<Category> categoryList, String name) {
+		boolean isDeleted = false;
+		
+		for(int i = 0; i < categoryList.size();i++) {
+			if(name.equals(categoryList.get(i).getName())) {
+				
+				categoryList.remove(i);
+				isDeleted = true;
 			}
 		}
-
-		if (check < 1) {
-			System.out.println("Category Does not Exist!");
+		return isDeleted;	
+		
+	}
+	
+	public static void deleteCategory(ArrayList<Category> categoryList) {
+		retrieveAllCategory(categoryList);
+		String name = Helper.readString("Enter category to delete (Category) > ");
+		Boolean isDeleted = doDeleteCategory(categoryList, name);
+		
+		
+		if (isDeleted == false) {
+			System.out.println("Delete Failed! Category does not exist");
+		}else {
+			System.out.println("Category Successfully Deleted!");
 		}
 	}
 
 	// ===================================== View Item
 	// =====================================
-	private static void viewAllItem(ArrayList<Item> itemList) {
-		C206_CaseStudy.setHeader("View All Item List");
-		String output = String.format("%-10s %-30s %-30s %-30s %-30s %-30s\n", "Name", "Description",
-				"Minimum Bid Price", "Auction Start Date", "Auction End Date", "Bid Increment");
-		output += retrieveAllItem(itemList);
-		System.out.println(output);
-	}
+//	private static void viewAllItem(ArrayList<Item> itemList) {
+//		C206_CaseStudy.setHeader("View All Item List");
+//		String output = String.format("%-10s %-30s %-30s %-30s %-30s %-30s\n", "Name", "Description",
+//				"Minimum Bid Price", "Auction Start Date", "Auction End Date", "Bid Increment");
+//		output += retrieveAllItem(itemList);
+//		System.out.println(output);
+//	}
+//
+//	private static String retrieveAllItem(ArrayList<Item> itemList) {
+//		// TODO Auto-generated method stub
+//		String output = "";
+//
+//		for (int i = 0; i < itemList.size(); i++) {
+//
+//			output += String.format("%-10s %-30s %-30s %-30s %-30s %-30s\n", itemList.get(i).getName(),
+//					itemList.get(i).getDescription(), itemList.get(i).getMinbidprice(),
+//					itemList.get(i).getAuctionstartDate(), itemList.get(i).getAuctionEndDate(),
+//					itemList.get(i).getBidIncrement());
+//		}
+//		return output;
+//	}
 
-	private static String retrieveAllItem(ArrayList<Item> itemList) {
-		// TODO Auto-generated method stub
+	public static String retrieveAllItem(ArrayList<Item> itemList) {
 		String output = "";
 
 		for (int i = 0; i < itemList.size(); i++) {
@@ -270,6 +284,13 @@ public class C206_CaseStudy {
 					itemList.get(i).getBidIncrement());
 		}
 		return output;
+
+	}
+
+	public static void viewAllItem(ArrayList<Item> itemList) {
+
+		String output = retrieveAllItem(itemList);
+		System.out.println(output);
 	}
 
 //=========================================== Add Item ===========================================
@@ -294,45 +315,64 @@ public class C206_CaseStudy {
 
 	// ================================= Delete Item Based On Name
 	// =================================
-	public static void deleteItem(ArrayList<Item> itemList) {
-		String itemName = Helper.readString("Enter Item Name to delete > ");
-		int check = 0;
-		for (int x = 0; x < itemList.size(); x++) {
-			if ((itemList.get(x).getName().equalsIgnoreCase(itemName))) {
-				itemList.remove(x);
-				System.out.println("Item Successfully Deleted!");
-				check = check + 1;
-				break;
+//	public static void deleteItem(ArrayList<Item> itemList) {
+//		String itemName = Helper.readString("Enter Item Name to delete > ");
+//		int check = 0;
+//		for (int x = 0; x < itemList.size(); x++) {
+//			if ((itemList.get(x).getName().equalsIgnoreCase(itemName))) {
+//				itemList.remove(x);
+//				System.out.println("Item Successfully Deleted!");
+//				check = check + 1;
+//				break;
+//			}
+//		}
+//
+//		if (check < 1) {
+//			System.out.println("Item Does not Exist!");
+//		}
+//
+//	}
+
+	public static boolean DodeleteItem(ArrayList<Item> itemList, String itemName) {
+
+		boolean isDeleted = false;
+
+		for (int i = 0; i < itemList.size(); i++) {
+			if (itemList.get(i).getName().equals(itemName)) {
+				itemList.remove(i);
+				isDeleted = true;
 			}
 		}
+		return isDeleted;
+	}
 
-		if (check < 1) {
-			System.out.println("Item Does not Exist!");
+	public static String deleteItem(ArrayList<Item> itemList, String itemName) {
+		C206_CaseStudy.retrieveAllItem(itemList);
+		String output = "Invalid Item Name entered!";
+		Boolean isDeleted = DodeleteItem(itemList, itemName);
+		if (isDeleted == true) {
+			output = "Item Deleted";
 		}
-
+		System.out.println(output);
+		return output;
 	}
 
 	// ===================================== Delete Bid
 	// =====================================
-	public static void deleteBid(ArrayList<Bid> bidList) {
+
+	public static void deleteBid(ArrayList<Bid> bidList, Bid id) {
 		// TODO Auto-generated method stub
 		C206_CaseStudy.viewAllBid(bidList);
-		String id = Helper.readString("Enter item ID > ");
+		bidList.remove(id);
 
-		Boolean delete = doDeleteBid(bidList, id);
-		if (delete == false) {
-			System.out.println("Invalid ID!");
-		} else {
-			System.out.println("Item " + id + " successfully deleted!");
-		}
 	}
 
-	public static Boolean doDeleteBid(ArrayList<Bid> bidList, String id) {
+	public static Boolean doDeleteBid(ArrayList<Bid> bidList) {
 		// TODO Auto-generated method stub
 		boolean isDeleted = false;
-
+		String id = Helper.readString("Enter item ID > ");
 		for (int i = 0; i < bidList.size(); i++) {
-			if (id.equalsIgnoreCase(bidList.get(i).getID())) {
+			if (bidList.get(i).getID().contains(id)) {
 				bidList.remove(i);
 
 				isDeleted = true;
