@@ -48,10 +48,10 @@ public class C206_CaseStudyTest {
 		SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
 		Date startAuc = DateFor.parse("08/08/2022");
 		Date endAuc = DateFor.parse("18/08/2022");
-		Item I1 = new Item("iPhone", "iphone 13 (Brand New)", 354.85, startAuc, endAuc, 55.5);
+		i1 = new Item("iPhone", "iphone 13 (Brand New)", 354.85, startAuc, endAuc, 55.5);
 		Date startAuc2 = DateFor.parse("18/08/2022");
 		Date endAuc2 = DateFor.parse("28/08/2022");
-		Item I2 = new Item("XiaoMi", "XiaoMi 13 (Brand New)", 27.85, startAuc2, endAuc2, 5.5);
+		i2 = new Item("XiaoMi", "XiaoMi 13 (Brand New)", 27.85, startAuc2, endAuc2, 5.5);
 
 		b1 = new Bid("ST657892F", "James", "James@gmail.com", "Sam@yahoo.com", 56.7);
 		b2 = new Bid("T0444444F", "Jamey", "Jamey@gmail.com", "Sammy@yahoo.com", 77.89);
@@ -158,6 +158,7 @@ public class C206_CaseStudyTest {
 		assertEquals("Test if that Item arraylist size is 2?", 2, itemList.size());
 	}
 
+	//Code #1
 //	@Test
 //    public void testDeleteItem() {
 //      assertNotNull("Test if there is valid Item arraylist to add to", itemList);
@@ -180,6 +181,28 @@ public class C206_CaseStudyTest {
 //      assertSame("Test that the first item in the list is i2", i2, itemList.get(0));
 //      assertEquals("Test the message", testOutput, msg);
 //}
+	
+	//Code #2 (OFFICIAL)
+	@Test
+	public void testDeleteItem() {
+		C206_CaseStudy.addItem(itemList, i1);
+		C206_CaseStudy.addItem(itemList, i2);
+
+		// Given an empty list, after adding 2 item, the size of the list is 2
+		assertEquals("Test if the item arrayList is 1?", 2, itemList.size());
+
+		// The Item added is the same as the first Item of the list
+		assertSame("Test that item is added same as the 1st item of the list", i1, itemList.get(0));
+
+		// boundary
+		assertNotNull("test if there is valid Item arraylist to delete from", itemList);
+
+		// Test that the size of the list is back to 1
+		C206_CaseStudy.deleteItem(itemList, i1);
+		assertEquals("Test that item arrayList size is 1?", 1, itemList.size());
+		assertSame("Test that 2nd item added is the first time of the list?", i2, itemList.get(0));
+		C206_CaseStudy.addItem(itemList, i1);
+	}
 
 	@Test
 	public void testAddBid() {
