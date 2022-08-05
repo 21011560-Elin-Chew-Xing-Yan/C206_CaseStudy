@@ -101,6 +101,63 @@ public class C206_CaseStudyTest {
 	    assertEquals("Test if that Category arraylist size is 2?", 2, categoryList.size());
 	}
 	
+	@Test
+	  public void testAddItem() {
+	    // Item list is not null, so that can add a new Item
+	    assertNotNull("Test if there is valid Item arraylist to add to", itemList);
+	    
+	    //Given an empty Item list, after adding 1 Item, the size of the Item list is 1
+	    C206_CaseStudy.addItem(itemList, i1);    
+	    assertEquals("Test if that Item arraylist size is 1?", 1, itemList.size());
+	    
+	    //The Item just added is same as the first item of the list
+	    assertSame("Test that Item added is same as the 1st item of the list?", i1, itemList.get(0));
+	    
+	    //Add another Item. Test that the size of the Item list is 2?
+	    C206_CaseStudy.addItem(itemList, i2);
+	    assertEquals("Test that Item arraylist size is 2?", 2, itemList.size());
+	    assertSame("Test that Item added is the same as 2nd item of the list?", i2, itemList.get(1));
+	    
+	  }
+	
+	@Test
+	public void testViewItem() {
+		// Test if Item list is not null but empty, so that can add a new item
+		assertNotNull("Test if there is valid Item arraylist to add to", itemList);
+
+		// test if the list of Item retrieved from the CaseStudy is empty
+		String allItem = C206_CaseStudy.retrieveAllItem(itemList);
+		String testOutput = "";
+		assertEquals("Check that View All Item List", testOutput, allItem);
+
+		// Given an empty list, after adding 2 items, test if the size of the list is 2
+		C206_CaseStudy.addItem(itemList, i1);
+		C206_CaseStudy.addItem(itemList, i2);
+		assertEquals("Test if that Item arraylist size is 2?", 2, itemList.size());
+	}
+	
+//	@Test
+//    public void testDeleteItem() {
+//      assertNotNull("Test if there is valid Item arraylist to add to", itemList);
+//      
+//      C206_CaseStudy.addItem(itemList, i1);
+//      C206_CaseStudy.addItem(itemList, i2);
+//      assertEquals("Test that Item list have 2", 2, itemList.size());
+//      
+//      String ItemName = "jack sparrow";
+//      String testOutput = "Invalid Item Name entered!";
+//      String msg = C206_CaseStudy.deleteItem(itemList, ItemName);
+//      assertEquals("Test that the first item in the list is i1", i1, itemList.get(0));
+//      assertEquals("Test that the second item in the list is i2", i2, itemList.get(1));
+//      assertEquals("Test the message", testOutput, msg);
+//      
+//      ItemName = i1.getName();
+//      testOutput = "Item Deleted";
+//      msg = C206_CaseStudy.deleteItem(itemList, ItemName);
+//      assertEquals("Test that item list have 2 items", 2, itemList.size());
+//      assertSame("Test that the first item in the list is i2", i2, itemList.get(0));
+//      assertEquals("Test the message", testOutput, msg);
+//}
 
 
 	@Test
