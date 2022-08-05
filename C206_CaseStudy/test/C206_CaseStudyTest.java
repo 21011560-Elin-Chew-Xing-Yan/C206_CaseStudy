@@ -1,14 +1,18 @@
 import static org.junit.Assert.*;
 
+
+import java.util.ArrayList;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 public class C206_CaseStudyTest {
+	
+	
 
 	private User u1;
 	private User u2;
@@ -37,6 +41,7 @@ public class C206_CaseStudyTest {
 
 	@Before
 	public void setUp() throws Exception {
+
 		User u1 = new User("Sally", "Pass123", "Sally@gmail.com");
 		User u2 = new User("Dally", "Pass132", "Dally@gmail.com");
 
@@ -65,6 +70,44 @@ public class C206_CaseStudyTest {
 		bidList = new ArrayList<Bid>();
 		dealList = new ArrayList<Deal>();
 	}
+	
+	
+	@Test
+	  public void testAddCategory() {
+	    // Category list is not null, so that can add a new category
+	    assertNotNull("Test if there is valid Category arraylist to add to", categoryList);
+	    
+	    //Given an empty Category list, after adding 1 category, the size of the Category list is 1
+	    C206_CaseStudy.addCategory(categoryList, c1);    
+	    assertEquals("Test if that Category arraylist size is 1?", 1, categoryList.size());
+	    
+	    //The Category just added is same as the first item of the list
+	    assertSame("Test that Category added is same as the 1st item of the list?", c1, categoryList.get(0));
+	    
+	    //Add another Category. Test that the size of the Category list is 2?
+	    C206_CaseStudy.addCategory(categoryList, c2);
+	    assertEquals("Test that Category arraylist size is 2?", 2, categoryList.size());
+	    assertSame("Test that Category added is the same as 2nd item of the list?", c2, categoryList.get(1));
+	    
+	  }
+	
+	@Test
+	public void testDisplayAllCategory() {
+	    // Test if Category list is not null but empty, so that can add a new Category
+	    assertNotNull("Test if there is valid Category arraylist to add to", categoryList);
+
+	    //test if the list of category retrieved from the C206_CaseStudy is empty
+	    String allCategory= C206_CaseStudy.retrieveAllCategory(categoryList);
+	    String testOutput = ""; 
+	    assertEquals("Check that displayAllCategorylist is empty", testOutput, allCategory);
+
+	    //Given an empty Category list, after adding 2 category, test if the size of the Category list is 2
+	    C206_CaseStudy.addCategory(categoryList, c1);
+	    C206_CaseStudy.addCategory(categoryList, c2);
+	    assertEquals("Test if that Category arraylist size is 2?", 2, categoryList.size());
+	}
+	
+
 
 	@Test
 	public void testAddBid() {
@@ -115,6 +158,7 @@ public class C206_CaseStudyTest {
 		// error condition
 //		ok = C206_CaseStudy.doDeleteBid(bidList, "ST123456F");
 //		assertFalse("Test if an same item is NOT okay to delete again?", ok);
+
 	}
 	@Test
 	public void testAddUser() {
@@ -176,6 +220,16 @@ public class C206_CaseStudyTest {
 
 	@After
 	public void tearDown() throws Exception {
+
+	}
+
+	@Test
+	public void c206_test() {
+		//fail("Not yet implemented"); 
+		assertTrue("C206_CaseStudy_SampleTest ",true);
+		
+		
+
 		u1 = null;
 		u2 = null;
 		c1 = null;
@@ -191,6 +245,8 @@ public class C206_CaseStudyTest {
 		itemList = null;
 		bidList = null;
 		dealList = null;
-	}
 
+	}
+	
+	
 }
