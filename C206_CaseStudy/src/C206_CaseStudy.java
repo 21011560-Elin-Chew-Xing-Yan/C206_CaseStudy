@@ -124,7 +124,7 @@ public class C206_CaseStudy {
 
 				} else if (deleteOption == 4) {
 					// Delete Bid ()
-					C206_CaseStudy.deleteBid(bidList);
+//					C206_CaseStudy.deleteBid(bidList);
 				} else if (deleteOption == 5) {
 					// Delete Deal (Imran)
 					C206_CaseStudy.deleteDeal(dealList);
@@ -314,25 +314,20 @@ public class C206_CaseStudy {
 
 	// ===================================== Delete Bid
 	// =====================================
-	public static void deleteBid(ArrayList<Bid> bidList) {
+
+	public static void deleteBid(ArrayList<Bid> bidList,Bid id) {
 		// TODO Auto-generated method stub
 		C206_CaseStudy.viewAllBid(bidList);
-		String id = Helper.readString("Enter item ID > ");
-
-		Boolean delete = doDeleteBid(bidList, id);
-		if (delete == false) {
-			System.out.println("Invalid ID!");
-		} else {
-			System.out.println("Item " + id + " successfully deleted!");
-		}
+		bidList.remove(id);
+	
 	}
 
-	public static Boolean doDeleteBid(ArrayList<Bid> bidList, String id) {
+	public static Boolean doDeleteBid(ArrayList<Bid> bidList) {
 		// TODO Auto-generated method stub
 		boolean isDeleted = false;
-
+		String id = Helper.readString("Enter item ID > ");
 		for (int i = 0; i < bidList.size(); i++) {
-			if (id.equalsIgnoreCase(bidList.get(i).getID())) {
+			if (bidList.get(i).getID().contains(id)) {
 				bidList.remove(i);
 
 				isDeleted = true;

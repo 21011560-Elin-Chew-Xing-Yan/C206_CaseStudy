@@ -51,8 +51,8 @@ public class C206_CaseStudyTest {
 		Date endAuc2 = DateFor.parse("28/08/2022");
 		Item I2 = new Item("XiaoMi", "XiaoMi 13 (Brand New)", 27.85, startAuc2, endAuc2, 5.5);
 
-		Bid b1 = new Bid("ST657892F", "James", "James@gmail.com", "Sam@yahoo.com", 56.7);
-		Bid b2 = new Bid("T0444444F", "Jamey", "Jamey@gmail.com", "Sammy@yahoo.com", 77.89);
+		b1 = new Bid("ST657892F", "James", "James@gmail.com", "Sam@yahoo.com", 56.7);
+		b2 = new Bid("T0444444F", "Jamey", "Jamey@gmail.com", "Sammy@yahoo.com", 77.89);
 
 		Date endDate = DateFor.parse("26/08/2022");
 		Deal d1 = new Deal("D3456", "Iphone13", "James@gmail.com", "Sam@yahoo.com", 567.89, endDate);
@@ -94,21 +94,23 @@ public class C206_CaseStudyTest {
 	}
 
 	@Test
-	// Donavan Incomplete Delete
 	public void testDeleteBid() {
+		C206_CaseStudy.addBid(bidList, b1);
+		C206_CaseStudy.addBid(bidList, b2);
+
+		// Given an empty list, after adding 2 item, the size of the list is 2
+		assertEquals("Test if the item arrayList is 1?", 2, bidList.size());
+
+		// The bid added is the same as the first bid of the list
+		assertSame("Test that bid is added same as the 1st bid of the list", b1, bidList.get(0));
+
 		// boundary
 		assertNotNull("test if there is valid Bid arraylist to delete from", bidList);
 
-		C206_CaseStudy.addBid(bidList, b1);
-
-		// normal
-//		Boolean ok = C206_CaseStudy.doDeleteBid(bidList, "ST657892F");
-//		assertTrue("Test if an available item is okay to delete?", ok);
-//		assertEquals(bidList.get(0).getName(), "ST657892F");
-
-		// error condition
-//		ok = C206_CaseStudy.doDeleteBid(bidList, "ST123456F");
-//		assertFalse("Test if an same item is NOT okay to delete again?", ok);
+		// Test that the size of the list is back to 1
+		C206_CaseStudy.deleteBid(bidList, b1);
+		assertEquals("Test that bid arrayList size is 1?", 1, bidList.size());
+		assertSame("Test that 2nd item added is the first time of the list?", b2, bidList.get(0));
 	}
 
 	@After
