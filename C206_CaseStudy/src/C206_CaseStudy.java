@@ -236,6 +236,7 @@ public class C206_CaseStudy {
 		
 	}
 	
+	
 	public static void deleteCategory(ArrayList<Category> categoryList) {
 		retrieveAllCategory(categoryList);
 		String name = Helper.readString("Enter category to delete (Category) > ");
