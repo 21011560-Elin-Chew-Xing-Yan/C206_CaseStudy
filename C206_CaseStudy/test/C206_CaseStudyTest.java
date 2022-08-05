@@ -101,6 +101,23 @@ public class C206_CaseStudyTest {
 	    assertEquals("Test if that Category arraylist size is 2?", 2, categoryList.size());
 	}
 	
+	public void testDeleteCategory() {
+		// boundary
+		assertNotNull("test if there is valid Category arraylist to delete from", categoryList);
+
+		C206_CaseStudy.addCategory(categoryList, c1);
+
+		// normal
+		Boolean ok = C206_CaseStudy.deleteCategory(categoryList, c1);
+		assertTrue("Test if an available item is okay to delete?", ok);
+		assertEquals(categoryList.get(0).getName(), c1);
+
+//		// error condition
+//		ok = C206_CaseStudy.doDeleteBid(bidList, "ST123456F");
+//		assertFalse("Test if an same item is NOT okay to delete again?", ok);
+
+	}
+	
 
 
 	@Test
@@ -144,12 +161,12 @@ public class C206_CaseStudyTest {
 
 		C206_CaseStudy.addBid(bidList, b1);
 
-		// normal
+//		// normal
 //		Boolean ok = C206_CaseStudy.doDeleteBid(bidList, "ST657892F");
 //		assertTrue("Test if an available item is okay to delete?", ok);
 //		assertEquals(bidList.get(0).getName(), "ST657892F");
-
-		// error condition
+//
+//		// error condition
 //		ok = C206_CaseStudy.doDeleteBid(bidList, "ST123456F");
 //		assertFalse("Test if an same item is NOT okay to delete again?", ok);
 
