@@ -107,22 +107,22 @@ public class C206_CaseStudyTest {
 
 	@Test
 	public void testDeleteCategory() {
-		// boundary
+		// Test if Category list is not null but empty, so that can delete a Category
 		assertNotNull("test if there is valid Category arraylist to delete from", categoryList);
 
 		C206_CaseStudy.addCategory(categoryList, c1);
 		C206_CaseStudy.addCategory(categoryList, c2);
-
-		// normal
+		
+		
+		// normal condition. Test that the Category can be deleted from the Category list
 		Boolean ok = C206_CaseStudy.doDeleteCategory(categoryList, c1.getName());
 		assertTrue("Test if an available item is okay to delete?", ok);
-		assertEquals(categoryList.get(0).getName(), c1);
 
-		// error condition
+		// error condition. Test that the same Category deleted cannot be deleted again 
 		ok = C206_CaseStudy.doDeleteCategory(categoryList, c1.getName());
 		assertFalse("Test if an same category is NOT okay to delete again?", ok);
 		
-		// Test that the size of the list is back to 1
+		// Test that the size of the list is back to 1 after deleting the first category
 		C206_CaseStudy.doDeleteCategory(categoryList, c1.getName());
 		assertEquals("Test that Category arrayList size is 1?", 1, categoryList.size());
 		assertSame("Test that 2nd Category added is the first item of the list?", c2, categoryList.get(0));
