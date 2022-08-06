@@ -39,8 +39,8 @@ public class C206_CaseStudyTest {
 	@Before
 	public void setUp() throws Exception {
 
-		User u1 = new User("Sally", "Pass123", "Sally@gmail.com");
-		User u2 = new User("Dally", "Pass132", "Dally@gmail.com");
+		u1 = new User("Sally", "Pass123", "Sally@gmail.com");
+		u2 = new User("Dally", "Pass132", "Dally@gmail.com");
 
 		c1 = new Category("Electronic");
 		c2 = new Category("Wellness");
@@ -316,21 +316,32 @@ public class C206_CaseStudyTest {
 		testOutput += String.format("%-20s %-20s %-20s\n","Dally" , "Pass132", "Dally@gmail.com");
 			
 		assertEquals("Check that ViewAllUserList", testOutput, allUsers);
+		
+		// error Condition
+		C206_CaseStudy.doDeleteUser(userList, u1.getEmail());
+		assertNotEquals("Check that the output is NOT the same after removing a user", testOutput, allUsers);
 	}
 	
 	@Test
 	public void testDeleteUser() {
+		assertNotNull("test if there is valid User arraylist to delete from", userList);
+
 		C206_CaseStudy.addUser(userList, u1);
 		C206_CaseStudy.addUser(userList, u2);
-		assertEquals("Test that item arrayList is 1?", 2, userList.size());
+
+		// normal
+		Boolean ok = C206_CaseStudy.doDeleteUser(userList, u1.getEmail());
+		assertTrue("Test if a user is okay to delete?", ok);
+		assertEquals(userList.get(0).getEmail(), u2.getEmail());
+
+		// error condition
+		ok = C206_CaseStudy.doDeleteUser(userList, u1.getEmail());
+		assertFalse("Test if an same user is NOT okay to delete again?", ok);
 		
-		assertSame("Test that item is added same as 1st Category of the list?", u1, userList.get(0));
-		
-		assertNotNull("Test if there is valid user arrayList to delete from", userList);
-		
-		C206_CaseStudy.deleteUser(userList);
-		assertEquals("Test that user arrayList size is 1? ", 1, userList.size());
-		assertSame("Test that 2nd user added is the first user of the list", u2, userList.get(0));
+		// Test that the size of the list is back to 1
+		C206_CaseStudy.doDeleteUser(userList, u1.getEmail());
+		assertEquals("Test that user arrayList size is 1?", 1, userList.size());
+		assertSame("Test that 2nd user added is the first item of the list?", u2, userList.get(0));
 	}
 
 	@After
