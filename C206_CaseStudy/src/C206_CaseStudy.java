@@ -422,6 +422,8 @@ public class C206_CaseStudy {
 				isDeleted = true;
 				System.out.println("Deleted Successfully!");
 
+			} else {
+				System.out.println("Incorrect Name ID!");
 			}
 		}
 		return isDeleted;
