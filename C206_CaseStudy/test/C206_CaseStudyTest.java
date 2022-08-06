@@ -89,7 +89,7 @@ public class C206_CaseStudyTest {
 	}
 
 	@Test
-	public void testDisplayAllCategory() {
+	public void testViewCategory() {
 		// Test if Category list is not null but empty, so that can add a new Category
 		assertNotNull("Test if there is valid Category arraylist to add to", categoryList);
 
@@ -114,7 +114,7 @@ public class C206_CaseStudyTest {
 		C206_CaseStudy.addCategory(categoryList, c2);
 		
 		
-		// normal condition. Test that the Category can be deleted from the Category list
+		// normal condition. Test that the Category can be deleted from the Category Zlist
 		Boolean ok = C206_CaseStudy.doDeleteCategory(categoryList, c1.getName());
 		assertTrue("Test if an available item is okay to delete?", ok);
 

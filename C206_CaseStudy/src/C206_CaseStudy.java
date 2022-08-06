@@ -48,7 +48,7 @@ public class C206_CaseStudy {
 					C206_CaseStudy.viewAllUser(userList);
 
 				} else if (viewOption == 2) {
-					C206_CaseStudy.displayAllCategory(categoryList);
+					C206_CaseStudy.viewAllCategory(categoryList);
 
 				} else if (viewOption == 3) {
 					C206_CaseStudy.viewAllItem(itemList);
@@ -226,7 +226,7 @@ public class C206_CaseStudy {
 		return output;
 	}
 
-	public static void displayAllCategory(ArrayList<Category> categoryList) {
+	public static void viewAllCategory(ArrayList<Category> categoryList) {
 		C206_CaseStudy.setHeader("CATEGORY LIST");
 		String output = String.format("%-10s \n", "CATEGORY NAME");
 		output += retrieveAllCategory(categoryList);
