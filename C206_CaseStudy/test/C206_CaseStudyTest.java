@@ -316,10 +316,6 @@ public class C206_CaseStudyTest {
 		testOutput += String.format("%-20s %-20s %-20s\n","Dally" , "Pass132", "Dally@gmail.com");
 			
 		assertEquals("Check that ViewAllUserList", testOutput, allUsers);
-		
-		// error Condition
-		C206_CaseStudy.doDeleteUser(userList, u1.getEmail());
-		assertNotEquals("Check that the output is NOT the same after removing a user", testOutput, allUsers);
 	}
 	
 	@Test
