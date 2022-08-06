@@ -167,6 +167,20 @@ public class C206_CaseStudy {
 
 	// ================================= Delete User Based On Email
 	// =================================
+	public static boolean doDeleteUser (ArrayList<User> userList, String email) {
+		boolean isDeleted = false;
+		
+		for(int i = 0; i < userList.size();i++) {
+			if(email.equals(userList.get(i).getEmail())) {
+				
+				userList.remove(i);
+				isDeleted = true;
+			}
+		}
+		return isDeleted;	
+		
+	}
+	
 	public static void deleteUser(ArrayList<User> userList) {
 		String user_del = Helper.readString("Enter user to delete (Email) > ");
 		int check = 0;

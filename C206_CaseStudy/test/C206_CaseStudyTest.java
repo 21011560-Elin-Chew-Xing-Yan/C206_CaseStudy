@@ -26,11 +26,11 @@ public class C206_CaseStudyTest {
 	private Deal d1;
 	private Deal d2;
 
-	ArrayList<User> userList = new ArrayList<User>();
-	ArrayList<Category> categoryList = new ArrayList<Category>();
-	ArrayList<Item> itemList = new ArrayList<Item>();
-	ArrayList<Bid> bidList = new ArrayList<Bid>();
-	ArrayList<Deal> dealList = new ArrayList<Deal>();
+	private ArrayList<User> userList;
+	private ArrayList<Category> categoryList;
+	private ArrayList<Item> itemList;
+	private ArrayList<Bid> bidList;
+	private ArrayList<Deal> dealList;
 
 	public C206_CaseStudyTest() {
 		super();
@@ -39,8 +39,8 @@ public class C206_CaseStudyTest {
 	@Before
 	public void setUp() throws Exception {
 
-		User u1 = new User("Sally", "Pass123", "Sally@gmail.com");
-		User u2 = new User("Dally", "Pass132", "Dally@gmail.com");
+		u1 = new User("Sally", "Pass123", "Sally@gmail.com");
+		u2 = new User("Dally", "Pass132", "Dally@gmail.com");
 
 		c1 = new Category("Electronic");
 		c2 = new Category("Wellness");
@@ -60,6 +60,12 @@ public class C206_CaseStudyTest {
 		Deal d1 = new Deal("D3456", "Iphone13", "James@gmail.com", "Sam@yahoo.com", 567.89, endDate);
 		Date endDate2 = DateFor.parse("17/12/2022");
 		Deal d2 = new Deal("D1111", "XiaoMi13", "Jameson@gmail.com", "Sammy@yahoo.com", 67.04, endDate2);
+		
+		userList = new ArrayList<User>();
+		categoryList = new ArrayList<Category>();
+		itemList = new ArrayList<Item>();
+		bidList = new ArrayList<Bid>();
+		dealList = new ArrayList<Deal>();
 	}
 
 	@Test
@@ -217,8 +223,8 @@ public class C206_CaseStudyTest {
 
 		// Add another item. test The size of the list is 2?
 		C206_CaseStudy.addBid(bidList, b2);
-		assertEquals("Test that Camcorder arraylist size is 2?", 2, bidList.size());
-		assertSame("Test that Camcorder is added same as 2nd item of the list?", b2, bidList.get(1));
+		assertEquals("Test that user arraylist size is 2?", 2, bidList.size());
+		assertSame("Test that user is added same as 2nd item of the list?", b2, bidList.get(1));
 	}
 
 	@Test
@@ -268,6 +274,70 @@ public class C206_CaseStudyTest {
 //		assertFalse("Test if an same item is NOT okay to delete again?", ok);
 
 
+	}
+	@Test
+	public void testAddUser() {
+		assertNotNull("Test if there is valid User arraylist to add to", userList);
+
+		// Given an empty list, after adding 1 item, the size of the list is 1
+		C206_CaseStudy.addUser(userList, u1);
+		assertEquals("Test if that User arraylist size is 1?", 1, userList.size());
+
+		// The item just added is as same as the first item of the list
+		assertSame("Test that User is added same as 1st item of the list?", u1, userList.get(0));
+
+		// Add another item. test The size of the list is 2?
+		C206_CaseStudy.addUser(userList, u2);
+		assertEquals("Test that User arraylist size is 2?", 2, userList.size());
+		assertSame("Test that User is added same as 2nd item of the list?", u2, userList.get(1));
+	}
+	
+	@Test
+	public void testViewUser() {
+		assertNotNull("Test if there is valid user arraylist to add to", userList);
+		
+		//test if the list of user retrieved from the SourceCentre is empty
+		String allUsers= C206_CaseStudy.retrieveAllUsers(userList);
+		String testOutput = "";
+		assertEquals("Check that ViewAlluserList", testOutput, allUsers);
+						
+		//Given an empty list, after adding 2 items, test if the size of the list is 2
+		C206_CaseStudy.addUser(userList, u1);
+		C206_CaseStudy.addUser(userList, u2);
+		assertEquals("Test if that User arraylist size is 2?", 2, userList.size());
+				
+		//test if the expected output string same as the list of users retrieved from the C206_CaseStudy
+		 for (int i = 0; i < userList.size(); i++) {
+			 allUsers += String.format("%-20s %-20s %-20s\n", userList.get(i).getUsername(), userList.get(i).getPassword(), userList.get(i).getEmail());
+		 }
+		
+
+		testOutput = String.format("%-20s %-20s %-20s\n", "Sally" , "Pass123", "Sally@gmail.com");
+		testOutput += String.format("%-20s %-20s %-20s\n","Dally" , "Pass132", "Dally@gmail.com");
+			
+		assertEquals("Check that ViewAllUserList", testOutput, allUsers);
+	}
+	
+	@Test
+	public void testDeleteUser() {
+		assertNotNull("test if there is valid User arraylist to delete from", userList);
+
+		C206_CaseStudy.addUser(userList, u1);
+		C206_CaseStudy.addUser(userList, u2);
+
+		// normal
+		Boolean ok = C206_CaseStudy.doDeleteUser(userList, u1.getEmail());
+		assertTrue("Test if a user is okay to delete?", ok);
+		assertEquals(userList.get(0).getEmail(), u2.getEmail());
+
+		// error condition
+		ok = C206_CaseStudy.doDeleteUser(userList, u1.getEmail());
+		assertFalse("Test if an same user is NOT okay to delete again?", ok);
+		
+		// Test that the size of the list is back to 1
+		C206_CaseStudy.doDeleteUser(userList, u1.getEmail());
+		assertEquals("Test that user arrayList size is 1?", 1, userList.size());
+		assertSame("Test that 2nd user added is the first item of the list?", u2, userList.get(0));
 	}
 
 	@After
