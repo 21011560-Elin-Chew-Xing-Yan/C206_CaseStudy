@@ -99,7 +99,7 @@ public class C206_CaseStudyTest {
 		assertEquals("Test if that Category arraylist size is 2?", 2, categoryList.size());
 	}
 
-	
+	@Test
 	public void testDeleteCategory() {
 		// boundary
 		assertNotNull("test if there is valid Category arraylist to delete from", categoryList);
