@@ -126,6 +126,7 @@ public class C206_CaseStudyTest {
 		C206_CaseStudy.doDeleteCategory(categoryList, c1.getName());
 		assertEquals("Test that Category arrayList size is 1?", 1, categoryList.size());
 		assertSame("Test that 2nd Category added is the first item of the list?", c2, categoryList.get(0));
+		C206_CaseStudy.addCategory(categoryList, c1);
 	}
 	
 
@@ -163,30 +164,6 @@ public class C206_CaseStudyTest {
 		C206_CaseStudy.addItem(itemList, i2);
 		assertEquals("Test if that Item arraylist size is 2?", 2, itemList.size());
 	}
-
-	//Code #1
-//	@Test
-//    public void testDeleteItem() {
-//      assertNotNull("Test if there is valid Item arraylist to add to", itemList);
-//      
-//      C206_CaseStudy.addItem(itemList, i1);
-//      C206_CaseStudy.addItem(itemList, i2);
-//      assertEquals("Test that Item list have 2", 2, itemList.size());
-//      
-//      String ItemName = "jack sparrow";
-//      String testOutput = "Invalid Item Name entered!";
-//      String msg = C206_CaseStudy.deleteItem(itemList, ItemName);
-//      assertEquals("Test that the first item in the list is i1", i1, itemList.get(0));
-//      assertEquals("Test that the second item in the list is i2", i2, itemList.get(1));
-//      assertEquals("Test the message", testOutput, msg);
-//      
-//      ItemName = i1.getName();
-//      testOutput = "Item Deleted";
-//      msg = C206_CaseStudy.deleteItem(itemList, ItemName);
-//      assertEquals("Test that item list have 2 items", 2, itemList.size());
-//      assertSame("Test that the first item in the list is i2", i2, itemList.get(0));
-//      assertEquals("Test the message", testOutput, msg);
-//}
 	
 	//Code #2 (OFFICIAL)
 	@Test
@@ -262,17 +239,6 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that bid arrayList size is 1?", 1, bidList.size());
 		assertSame("Test that 2nd item added is the first time of the list?", b2, bidList.get(0));
 		C206_CaseStudy.addBid(bidList, b1);
-
-
-//		// normal
-//		Boolean ok = C206_CaseStudy.doDeleteBid(bidList, "ST657892F");
-//		assertTrue("Test if an available item is okay to delete?", ok);
-//		assertEquals(bidList.get(0).getName(), "ST657892F");
-//
-//		// error condition
-//		ok = C206_CaseStudy.doDeleteBid(bidList, "ST123456F");
-//		assertFalse("Test if an same item is NOT okay to delete again?", ok);
-
 
 	}
 	@Test
