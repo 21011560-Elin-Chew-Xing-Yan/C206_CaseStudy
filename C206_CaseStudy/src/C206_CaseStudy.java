@@ -247,9 +247,7 @@ public class C206_CaseStudy {
 			}
 		}
 		return isDeleted;	
-		
 	}
-	
 	
 	public static void deleteCategory(ArrayList<Category> categoryList) {
 		retrieveAllCategory(categoryList);

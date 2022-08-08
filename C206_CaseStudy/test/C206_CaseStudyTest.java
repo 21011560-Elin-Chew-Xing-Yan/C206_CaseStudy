@@ -70,7 +70,7 @@ public class C206_CaseStudyTest {
 
 	@Test
 	public void testAddCategory() {
-		// Category list is not null, so that can add a new category
+		// Category list is not null, so that a new category can add a new category
 		assertNotNull("Test if there is valid Category arraylist to add to", categoryList);
 
 		// Given an empty Category list, after adding 1 category, the size of the
@@ -84,13 +84,13 @@ public class C206_CaseStudyTest {
 		// Add another Category. Test that the size of the Category list is 2?
 		C206_CaseStudy.addCategory(categoryList, c2);
 		assertEquals("Test that Category arraylist size is 2?", 2, categoryList.size());
+		//The category just added is as same as the 2nd item of the list
 		assertSame("Test that Category added is the same as 2nd item of the list?", c2, categoryList.get(1));
-
 	}
 
 	@Test
 	public void testViewCategory() {
-		// Test if Category list is not null but empty, so that can add a new Category
+		// Test if Category list is not null so that can add a new Category
 		assertNotNull("Test if there is valid Category arraylist to add to", categoryList);
 
 		// test if the list of category retrieved from the C206_CaseStudy is empty
@@ -98,7 +98,7 @@ public class C206_CaseStudyTest {
 		String testOutput = "";
 		assertEquals("Check that displayAllCategorylist is empty", testOutput, allCategory);
 
-		// Given an empty Category list, after adding 2 category, test if the size of
+		// Test that given an empty Category list, after adding 2 category, test if the size of
 		// the Category list is 2
 		C206_CaseStudy.addCategory(categoryList, c1);
 		C206_CaseStudy.addCategory(categoryList, c2);
@@ -114,7 +114,7 @@ public class C206_CaseStudyTest {
 		C206_CaseStudy.addCategory(categoryList, c2);
 		
 		
-		// normal condition. Test that the Category can be deleted from the Category Zlist
+		// normal condition. Test that the Category can be deleted from the Category list
 		Boolean ok = C206_CaseStudy.doDeleteCategory(categoryList, c1.getName());
 		assertTrue("Test if an available item is okay to delete?", ok);
 
