@@ -57,9 +57,9 @@ public class C206_CaseStudyTest {
 		b2 = new Bid("T0444444F", "Jamey", "Jamey@gmail.com", "Sammy@yahoo.com", 77.89);
 
 		Date endDate = DateFor.parse("26/08/2022");
-		Deal d1 = new Deal("D3456", "Iphone13", "James@gmail.com", "Sam@yahoo.com", 567.89, endDate);
+		d1 = new Deal("D3456", "Iphone13", "James@gmail.com", "Sam@yahoo.com", 567.89, endDate);
 		Date endDate2 = DateFor.parse("17/12/2022");
-		Deal d2 = new Deal("D1111", "XiaoMi13", "Jameson@gmail.com", "Sammy@yahoo.com", 67.04, endDate2);
+		d2 = new Deal("D1111", "XiaoMi13", "Jameson@gmail.com", "Sammy@yahoo.com", 67.04, endDate2);
 		
 		userList = new ArrayList<User>();
 		categoryList = new ArrayList<Category>();
@@ -339,7 +339,60 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that user arrayList size is 1?", 1, userList.size());
 		assertSame("Test that 2nd user added is the first item of the list?", u2, userList.get(0));
 	}
+	@Test
+	public void testAddDeal() {
+		assertNotNull("Test if there is valid deal arraylist to add to", dealList);
 
+		// Given an empty list, after adding 1 item, the size of the list is 1
+		C206_CaseStudy.addDeal(dealList, d1);
+		assertEquals("Test if that Deal arraylist size is 1?", 1, dealList.size());
+
+		// The item just added is as same as the first item of the list
+		assertSame("Test that Deal is added same as 1st item of the list?", d1, dealList.get(0));
+
+		// Add another item. test The size of the list is 2?
+		C206_CaseStudy.addDeal(dealList, d2);
+		assertEquals("Test that deal arraylist size is 2?", 2, dealList.size());
+		assertSame("Test that deal is added same as 2nd deal of the list?", d2, dealList.get(1));
+	}
+	@Test
+	public void testViewDeal() {
+		// Test if Deal list is not null but empty, so that can add a new item
+		assertNotNull("Test if there is valid Deal arraylist to add to",dealList);
+
+		// test if the list of Bid retrieved from the CaseStudy is empty
+		String alldeal= C206_CaseStudy.retrieveAlldeal(dealList);
+		String testOutput = "";
+		assertEquals("Check that View All deal List", testOutput, alldeal);
+
+		// Given an empty list, after adding 2 items, test if the size of the list is 2
+		C206_CaseStudy.addDeal(dealList, d1);
+		C206_CaseStudy.addDeal(dealList, d2);
+		assertEquals("Test if that Deal arraylist size is 2?", 2, dealList.size());
+	}
+
+	@Test
+	public void testDeleteDeal() {
+		C206_CaseStudy.addDeal(dealList, d1);
+		C206_CaseStudy.addDeal(dealList, d2);
+
+		// Given an empty list, after adding 2 item, the size of the list is 2
+		assertEquals("Test if the item arrayList is 1?", 2, dealList.size());
+
+		// The bid added is the same as the first deal of the list
+		assertSame("Test that deal is added same as the 1st deal of the list", d1, dealList.get(0));
+
+		// boundary
+		assertNotNull("test if there is valid Deal arraylist to delete from", dealList);
+
+		// Test that the size of the list is back to 1
+		C206_CaseStudy.deleteDeal(dealList, d1);
+		assertEquals("Test that deal arrayList size is 1?", 1, dealList.size());
+		assertSame("Test that 2nd deal added is the first time of the list?", d2, dealList.get(0));
+		C206_CaseStudy.addDeal(dealList, d1);
+	}
+	
+	
 	@After
 	public void tearDown() throws Exception {
 

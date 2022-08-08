@@ -125,7 +125,7 @@ public class C206_CaseStudy {
 				} else if (deleteOption == 4) {
 					C206_CaseStudy.doDeleteBid(bidList);
 				} else if (deleteOption == 5) {
-					C206_CaseStudy.deleteDeal(dealList);
+					C206_CaseStudy.doDeleteDeal(dealList);
 
 				} else {
 					System.out.println("Invalid option...");
@@ -540,7 +540,7 @@ public class C206_CaseStudy {
 		System.out.println(output);
 	}
 
-	private static String retrieveAlldeal(ArrayList<Deal> DealList) {
+	public static String retrieveAlldeal(ArrayList<Deal> DealList) {
 		// TODO Auto-generated method stub
 		String output = "";
 
@@ -574,25 +574,21 @@ public class C206_CaseStudy {
 	}
 
 // ===================================== Delete Deal =====================================
-	private static void deleteDeal(ArrayList<Deal> dealList) {
+	public static void deleteDeal(ArrayList<Deal> dealList, Deal id ) {
 		// TODO Auto-generated method stub
 		C206_CaseStudy.viewAllDeal(dealList);
-		String id = Helper.readString("Enter deal ID > ");
-
-		Boolean delete = doDeleteDeal(dealList, id);
-		if (delete == false) {
-			System.out.println("Invalid ID!");
-		} else {
-			System.out.println("Item " + id + " successfully deleted!");
-		}
+		dealList.remove(id);
 	}
 
-	private static Boolean doDeleteDeal(ArrayList<Deal> dealList, String id) {
+	
+
+	public static Boolean doDeleteDeal(ArrayList<Deal> dealList) {
 		// TODO Auto-generated method stub
 		boolean isDeleted = false;
 
-		for (int i = 0; i < dealList.size(); i++) {
-			if (id.equalsIgnoreCase(dealList.get(i).getDealID())) {
+		String id = Helper.readString("Enter item ID > ");
+		for (int i = 0; i<dealList.size(); i ++) {
+			if(dealList.get(i).getDealID().contains(id)) {
 				dealList.remove(i);
 
 				isDeleted = true;
