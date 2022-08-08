@@ -278,50 +278,6 @@ public class C206_CaseStudy {
 	// ===================================== View Item
 	// =====================================
 	
-	//Code #1
-//	private static void viewAllItem(ArrayList<Item> itemList) {
-//		C206_CaseStudy.setHeader("View All Item List");
-//		String output = String.format("%-10s %-30s %-30s %-30s %-30s %-30s\n", "Name", "Description",
-//				"Minimum Bid Price", "Auction Start Date", "Auction End Date", "Bid Increment");
-//		output += retrieveAllItem(itemList);
-//		System.out.println(output);
-//	}
-//
-//	private static String retrieveAllItem(ArrayList<Item> itemList) {
-//		// TODO Auto-generated method stub
-//		String output = "";
-//
-//		for (int i = 0; i < itemList.size(); i++) {
-//
-//			output += String.format("%-10s %-30s %-30s %-30s %-30s %-30s\n", itemList.get(i).getName(),
-//					itemList.get(i).getDescription(), itemList.get(i).getMinbidprice(),
-//					itemList.get(i).getAuctionstartDate(), itemList.get(i).getAuctionEndDate(),
-//					itemList.get(i).getBidIncrement());
-//		}
-//		return output;
-//	}
-
-	
-	//Code #2
-//	public static String retrieveAllItem(ArrayList<Item> itemList) {
-//		String output = "";
-//
-//		for (int i = 0; i < itemList.size(); i++) {
-//
-//			output += String.format("%-10s %-30s %-30s %-30s %-30s %-30s\n", itemList.get(i).getName(),
-//					itemList.get(i).getDescription(), itemList.get(i).getMinbidprice(),
-//					itemList.get(i).getAuctionstartDate(), itemList.get(i).getAuctionEndDate(),
-//					itemList.get(i).getBidIncrement());
-//		}
-//		return output;
-//
-//	}
-//
-//	public static void viewAllItem(ArrayList<Item> itemList) {
-//
-//		String output = retrieveAllItem(itemList);
-//		System.out.println(output);
-//	}
 	
 	//Code #3 (OFFICIAL)
 	private static void viewAllItem(ArrayList<Item> itemList) {
