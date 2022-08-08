@@ -370,50 +370,6 @@ public class C206_CaseStudy {
 	// ================================= Delete Item Based On Name
 	// =================================
 	
-	//Code #1
-//	public static void deleteItem(ArrayList<Item> itemList) {
-//		String itemName = Helper.readString("Enter Item Name to delete > ");
-//		int check = 0;
-//		for (int x = 0; x < itemList.size(); x++) {
-//			if ((itemList.get(x).getName().equalsIgnoreCase(itemName))) {
-//				itemList.remove(x);
-//				System.out.println("Item Successfully Deleted!");
-//				check = check + 1;
-//				break;
-//			}
-//		}
-//
-//		if (check < 1) {
-//			System.out.println("Item Does not Exist!");
-//		}
-//
-//	}
-
-	//Code#2
-//	public static boolean DodeleteItem(ArrayList<Item> itemList, String itemName) {
-//
-//		boolean isDeleted = false;
-//
-//		for (int i = 0; i < itemList.size(); i++) {
-//			if (itemList.get(i).getName().equals(itemName)) {
-//				itemList.remove(i);
-//				isDeleted = true;
-//			}
-//		}
-//		return isDeleted;
-//	}
-//
-//	public static String deleteItem(ArrayList<Item> itemList, String itemName) {
-//		C206_CaseStudy.retrieveAllItem(itemList);
-//		String output = "Invalid Item Name entered!";
-//		Boolean isDeleted = DodeleteItem(itemList, itemName);
-//		if (isDeleted == true) {
-//			output = "Item Deleted";
-//		}
-//		System.out.println(output);
-//		return output;
-//	}
-	
 	//Code #3 (OFFICIAL)
 	public static void deleteItem(ArrayList<Item> itemList, Item id) {
 		// TODO Auto-generated method stub
